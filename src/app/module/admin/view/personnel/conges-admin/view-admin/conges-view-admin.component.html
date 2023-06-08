@@ -1,0 +1,56 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'congesTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Date debut' | translate}}</label>
+                        <p-calendar id="1" [disabled]="true"  placeholder="{{'Date debut' | translate}}"  [(ngModel)]="item.dateDebut" [showIcon]="true"   [dateFormat]="'dd/mm/yy'"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Duree' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="2" [disabled]="true" placeholder="{{'Duree' | translate}}" [(ngModel)]="item.duree"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'annee' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Annee' | translate}}" [(ngModel)]="item.annee"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="5">{{'Numero autorisation' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'Numero autorisation' | translate}}" [(ngModel)]="item.numeroAutorisation"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="6">{{'Date autorisation' | translate}}</label>
+                        <p-calendar id="6" [disabled]="true"  [ placeholder="{{'Date autorisation' | translate}}"  [(ngModel)]="item.dateAutorisation" [showIcon]="true"   [dateFormat]="'dd/mm/yy'"></p-calendar>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="3">{{'Jour restant par annee' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="3" [disabled]="true" placeholder="{{'Jour restant par annee' | translate}}" [(ngModel)]="item.jourRestantParAnnee"></p-inputNumber>
+                    </div>
+                  <!--  <div class="field col-12 md:col-6">
+                        <label for="4">{{'Status' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Status' | translate}}" [(ngModel)]="item.status"></p-inputNumber>
+                    </div>-->
+                    <div class="field col-12 md:col-3">
+                        <label for="16">{{'Employe' | translate}}</label>
+                        <p-dropdown [options]="employes" [(ngModel)]="item.employe" id="16" [disabled]="true" optionLabel="cin" placeholder="{{'Employe' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

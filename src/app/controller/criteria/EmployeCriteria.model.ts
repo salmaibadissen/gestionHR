@@ -1,0 +1,67 @@
+import {ParcoursUniversitaireCriteria} from './ParcoursUniversitaireCriteria.model';
+import {CongesCriteria} from './CongesCriteria.model';
+import {DepartementCriteria} from './DepartementCriteria.model';
+import {SexeCriteria} from './SexeCriteria.model';
+import {EchelonCriteria} from './EchelonCriteria.model';
+import {PromotionCriteria} from './PromotionCriteria.model';
+import {PosteCriteria} from './PosteCriteria.model';
+import {NotationCriteria} from './NotationCriteria.model';
+import {EchelleCriteria} from './EchelleCriteria.model';
+import {BaseCriteria} from 'src/app/zynerator/criteria/BaseCriteria.model';
+import {LocalCriteria} from "./LocalCriteria.model";
+import {SituationFamilialeCriteria} from "./SituationFamilialeCriteria.model";
+
+
+export class EmployeCriteria  extends   BaseCriteria  {
+
+    public id: number;
+    public username: string;
+    public usernameLike: string;
+    public password: string;
+    public passwordLike: string;
+    public prenom: string;
+    public prenomLike: string;
+    public nom: string;
+    public nomLike: string;
+    public nomArabe: string;
+    public nomArabeLike: string;
+    public dateDeNaissance: Date;
+    public dateDeNaissanceFrom: Date;
+    public dateDeNaissanceTo: Date;
+    public lieuDeNaissance: string;
+    public lieuDeNaissanceLike: string;
+    public adresse: string;
+    public adresseLike: string;
+    public cin: string;
+    public cinLike: string;
+    public situationFamiliale: SituationFamilialeCriteria;
+    public situationFamiliales: Array<SituationFamilialeCriteria>;
+    public tel: string;
+    public telLike: string;
+    public dateEmbauche: Date;
+    public dateEmbaucheFrom: Date;
+    public dateEmbaucheTo: Date;
+     public matricule: number;
+     public matriculeMin: number;
+     public matriculeMax: number;
+    public adressEmail: string;
+    public adressEmailLike: string;
+    public compteBancaire: string;
+    public compteBancaireLike: string;
+  public sexe: SexeCriteria ;
+  public sexes: Array<SexeCriteria> ;
+  public parcoursUniversitaire: ParcoursUniversitaireCriteria ;
+  public parcoursUniversitaires: Array<ParcoursUniversitaireCriteria> ;
+  public departement: DepartementCriteria ;
+  public departements: Array<DepartementCriteria> ;
+  public poste: String ;
+  public posteLike: String ;
+  public notation: NotationCriteria ;
+  public notations: Array<NotationCriteria> ;
+  public conges: CongesCriteria ;
+  public congess: Array<CongesCriteria> ;
+  public local: LocalCriteria;
+  public locals: Array<LocalCriteria> ;
+    public promotion: PromotionCriteria;
+    public promotions: Array<PromotionCriteria> ;
+}

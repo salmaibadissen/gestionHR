@@ -1,0 +1,91 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'notationTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'notationTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="1">{{'notationPremierNote' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="1"
+                                                           placeholder="{{'notationPremierNote' | translate}}" [(ngModel)]="item.premierNote"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="2">{{'notationDeusiemeNote' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="2"
+                                                           placeholder="{{'notationDeusiemeNote' | translate}}" [(ngModel)]="item.deusiemeNote"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="3">{{'notationTroisiemeNote' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="3"
+                                                           placeholder="{{'notationTroisiemeNote' | translate}}" [(ngModel)]="item.troisiemeNote"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="4">{{'notationQuatriemeNote' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="4"
+                                                           placeholder="{{'notationQuatriemeNote' | translate}}" [(ngModel)]="item.quatriemeNote"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-4">
+                                            <label for="5">{{'notationCinquiemeNote' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="5"
+                                                           placeholder="{{'notationCinquiemeNote' | translate}}" [(ngModel)]="item.cinquiemeNote"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>
+
+                                      <!--  <div class="field col-12 md:col-4">
+                                            <label for="6">{{'notationSommeDesNotes' | translate}}</label>
+                                            <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="6"
+                                                           placeholder="{{'notationSommeDesNotes' | translate}}" [(ngModel)]="item.sommeDesNotes"  >
+                                            </p-inputNumber>
+                                            
+                                        </div>-->
+
+                            <div class="field col-12 md:col-6">
+                                <label for="7">{{'Année' | translate}}</label>
+                                <p-calendar appendTo="body" id="7"  placeholder="{{'Année' | translate}}"  [(ngModel)]="item.annee"
+                                            view="year" dateFormat="yy" inputId="yearpicker"  >
+                                </p-calendar>
+
+                            </div>
+                            <div class="field col-12 md:col-6">
+                                <label for="8">{{'Employe' | translate}}</label>
+                                <p-dropdown appendTo="body" [options]="employes" [(ngModel)]="item.employe" id="8"
+                                            [filter]="true" filterMatchMode="contains"
+                                            [showClear]="true" optionLabel="cin"
+                                            placeholder="{{'Employe' | translate}}">
+                                </p-dropdown>
+
+                            </div>
+                        </div>
+                    </p-tabPanel>
+
+                </p-tabView>
+            </ng-template>
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+
+
+    </p-dialog>

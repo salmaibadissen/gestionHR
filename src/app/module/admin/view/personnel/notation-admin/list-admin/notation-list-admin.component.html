@@ -1,0 +1,221 @@
+<div class="grid">
+    <div class="col-12">
+        <p-toast></p-toast>
+        <div class="card">
+            <p-toolbar styleClass="mb-4">
+                <ng-template pTemplate="left">
+                                        <button pButton pRipple label=" {{'new' | translate}}" icon="pi pi-plus" class="p-button-success mr-2 mb-2" (click)="openCreate('Notation')"></button>
+                    <button pButton pRipple label=" {{'search' | translate}}" icon="pi pi-{{findByCriteriaShow?'angle-down':'angle-right'}}" class="p-button-warning mr-2 mb-2" (click)="this.showSearch()"></button>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <div class="flex">
+                        <p-splitButton label=" {{'export' | translate}}" icon="pi pi-download" styleClass="p-button-help" [model]="excelPdfButons"></p-splitButton>
+                    </div>
+                </ng-template>
+
+            </p-toolbar>
+            <p-toolbar *ngIf="findByCriteriaShow">
+
+                <div class="align-form-search">
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.premierNoteMin" id="1-1"></p-inputNumber>
+                            <label for="1-1">{{'Premier note' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.premierNoteMax" id="1-2"></p-inputNumber>
+                            <label for="1-2">{{'Premier note' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.deusiemeNoteMin" id="2-1"></p-inputNumber>
+                            <label for="2-1">{{'Deusieme note' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.deusiemeNoteMax" id="2-2"></p-inputNumber>
+                            <label for="2-2">{{'Deusieme note' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.troisiemeNoteMin" id="3-1"></p-inputNumber>
+                            <label for="3-1">{{'Troisieme note' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.troisiemeNoteMax" id="3-2"></p-inputNumber>
+                            <label for="3-2">{{'Troisieme note' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.quatriemeNoteMin" id="4-1"></p-inputNumber>
+                            <label for="4-1">{{'Quatrieme note' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.quatriemeNoteMax" id="4-2"></p-inputNumber>
+                            <label for="4-2">{{'Quatrieme note' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.cinquiemeNoteMin" id="5-1"></p-inputNumber>
+                            <label for="5-1">{{'Cinquieme note' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.cinquiemeNoteMax" id="5-2"></p-inputNumber>
+                            <label for="5-2">{{'Cinquieme note' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.sommeDesNotesMin" id="6-1"></p-inputNumber>
+                            <label for="6-1">{{'Somme des notes' | translate}} Min</label>
+                        </span>
+                       <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-inputNumber class="mr-2" mode="decimal" [(ngModel)]="criteria.sommeDesNotesMax" id="6-2"></p-inputNumber>
+                            <label for="6-2">{{'Somme des notes' | translate}} Max</label>
+                       </span>
+                        <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <input class="mr-2" pInputText id="7" type="text"  [(ngModel)]="criteria.annee">
+                            <label for="7">{{'Année' | translate}}</label>
+                        </span>
+                   <span class=" p-float-label mr-3 align-search-items mt-4">
+                            <p-dropdown [options]="employes" [(ngModel)]="criteria.employe" id="16" [filter]="true"
+                                        [showClear]="true"  placeholder="{{'Employe' | translate}}" optionLabel="cin">
+                            </p-dropdown>
+                        </span>
+                </div>
+
+                <div class="align-search-button">
+                    <button pButton pRipple label="{{'validate' | translate}}" icon="pi pi-sort-amount-down" class="p-button-info mr-2" (click)="findPaginatedByCriteria()"></button>
+                </div>
+            </p-toolbar>
+
+
+            <p-table #dt [value]="items" [columns]="cols" [rows]="8" [paginator]="false"
+                    [globalFilterFields]="['premierNote', 'deusiemeNote', 'troisiemeNote', 'quatriemeNote', 'cinquiemeNote', 'sommeDesNotes', 'dateSaisir']" [(selection)]="selections"
+                    [rowHover]="true" dataKey="id" styleClass="p-datatable-customers"
+                    currentPageReportTemplate="{{'Les éléments de {first} à {last} sur {totalRecords} ' | translate}}"
+                    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" selectionMode="multiple">
+                <ng-template pTemplate="caption">
+                    <div class="flex flex-column flex-row justify-content-between table-header">
+                        <h5 class="p-m-0">{{'notationHeader' | translate}}</h5>
+                        <span class="p-input-icon-left ml-auto">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="{{'searchInput' | translate}}" (input)="dt.filterGlobal($event.target.value, 'contains')"/>
+                        </span>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 3rem">
+                            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                        </th>
+                                
+                       <!-- <th pSortableColumn="Archevement tache">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Archevement tache' | translate}}</span>
+                                <p-sortIcon field="premierNote"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="Rendement">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Rendement' | translate}}</span>
+                                <p-sortIcon field="deusiemeNote"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="Capacite organisation">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Capacite organisation' | translate}}</span>
+                                <p-sortIcon field="troisiemeNote"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="Comportement professionnel ">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Comportement professionnel' | translate}}</span>
+                                <p-sortIcon field="quatriemeNote"></p-sortIcon>
+                            </div>
+                        </th>
+                                
+                                
+                        <th pSortableColumn="Recherche">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Recherche' | translate}}</span>
+                                <p-sortIcon field="cinquiemeNote"></p-sortIcon>
+                            </div>
+                        </th>-->
+                                
+                                
+                        <th pSortableColumn="sommeDesNotes">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Somme des notes' | translate}}</span>
+                                <p-sortIcon field="sommeDesNotes"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th pSortableColumn="annee">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Année' | translate}}</span>
+                                <p-sortIcon field="annee"></p-sortIcon>
+                            </div>
+                        </th>
+                        <th pSortableColumn="employe">
+                            <div class="p-d-flex p-jc-between p-ai-center">
+                                <span>{{'Employe' | translate}}</span>
+                                <p-sortIcon field="employe"></p-sortIcon>
+                            </div>
+                        </th>
+
+
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-element>
+                    <tr>
+                        <td>
+                            <p-tableCheckbox [value]="element"></p-tableCheckbox>
+                        </td>
+                            
+                      <!--  <td>{{element.premierNote}}</td>
+                            
+                            
+                        <td>{{element.deusiemeNote}}</td>
+                            
+                            
+                        <td>{{element.troisiemeNote}}</td>
+                            
+                            
+                        <td>{{element.quatriemeNote}}</td>
+                            
+                            
+                        <td>{{element.cinquiemeNote}}</td>-->
+                            
+                            
+                        <td>{{element.sommeDesNotes}}</td>
+                            
+                            
+                        <td>{{element.annee}}</td>
+
+                        <td>{{element.employe?.cin}}
+
+
+                        <td>
+                            <button pButton pRipple icon="pi pi-pencil"  class="p-button-rounded p-button-success mr-2" (click)="edit(element)"></button>
+                            <button pButton pRipple icon="pi pi-list" class="p-button-rounded p-button-info mr-2" (click)="view(element)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mr-2" (click)="delete(element)"></button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="summary">
+                    <p-paginator  [rows]="10" [totalRecords]="totalRecords" (onPageChange)="onPage($event)"></p-paginator>
+                    <div class="p-d-flex p-ai-center p-jc-between">
+                        En totale il {{items ? totalRecords == 1 ? 'y a' : 'y a' : 'y a' }} {{items ? totalRecords : 0 }} {{items ? totalRecords == 1 ? 'notation' : 'notations' : 0 }}.
+                    </div>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <app-notation-create-admin></app-notation-create-admin>
+        <app-notation-edit-admin></app-notation-edit-admin>
+        <app-notation-view-admin></app-notation-view-admin>
+        <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+    </div>
+</div>

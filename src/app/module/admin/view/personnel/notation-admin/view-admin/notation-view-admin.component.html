@@ -1,0 +1,56 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'notationTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-4">
+                        <label for="1">{{'Premier note' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="1" [disabled]="true" placeholder="{{'Premier note' | translate}}" [(ngModel)]="item.premierNote"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="2">{{'Deusieme note' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="2" [disabled]="true" placeholder="{{'Deusieme note' | translate}}" [(ngModel)]="item.deusiemeNote"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="3">{{'Troisieme note' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="3" [disabled]="true" placeholder="{{'Troisieme note' | translate}}" [(ngModel)]="item.troisiemeNote"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="4">{{'Quatrieme note' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="4" [disabled]="true" placeholder="{{'Quatrieme note' | translate}}" [(ngModel)]="item.quatriemeNote"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="5">{{'Cinquieme note' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="5" [disabled]="true" placeholder="{{'Cinquieme note' | translate}}" [(ngModel)]="item.cinquiemeNote"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="6">{{'Somme des notes' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="6" [disabled]="true" placeholder="{{'Somme des notes' | translate}}" [(ngModel)]="item.sommeDesNotes"></p-inputNumber>
+                    </div>
+                    <div class="field col-12 md:col-4">
+                        <label for="7">{{'Année' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Année' | translate}}" autofocus  id="7" [(ngModel)]="item.annee">
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="16">{{'Employe' | translate}}</label>
+                        <p-dropdown [options]="employes" [(ngModel)]="item.employe" id="16" [disabled]="true" optionLabel="cin" placeholder="{{'Employe' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

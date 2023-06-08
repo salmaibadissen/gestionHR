@@ -1,0 +1,383 @@
+        <p-dialog [(visible)]="editDialog" [style]="{width: '70vw'}" header="{{'departementTabPan' | translate}}" [modal]="true" styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+            <ng-template pTemplate="content" >
+                <p-tabView>
+                    <p-tabPanel header="{{'departementTabPan' | translate}}">
+                        <div class="grid">
+
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="1">{{'departementNom' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'departementNom' | translate}}" id="1" [(ngModel)]="item.nom"
+                                                     />
+                                            
+                                        </div>
+
+                                        <div class="field col-12 md:col-6">
+                                            <label for="2">{{'departementDiscription' | translate}}</label>
+                                            <input   appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="{{'departementDiscription' | translate}}" id="2" [(ngModel)]="item.discription"
+                                                     />
+                                            
+                                        </div>
+
+
+
+                                 <!--   <div class="field col-11 md:col-5">
+                                            <label for="5">{{'departementEmploye' | translate}}</label>
+                                            <p-dropdown   appendTo="body" [options]="employes" [(ngModel)]="item.employe" id="5"[filter]="true" filterMatchMode="contains"
+                                                    [showClear]="true" optionLabel="password" placeholder="{{'departementEmploye' | translate}}"  >
+                                            </p-dropdown>
+                                            
+                                        </div>
+                                        <div class="col-1">
+                                            <label></label>
+                                            <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEmploye('Employe')" class="p-button-success one-colonne-btn-success-align"></button>
+                                        </div>
+                        </div>
+                    </p-tabPanel>
+
+                            <p-tabPanel header="{{'Postes' | translate}}">
+                                <p-tabView [(activeIndex)]="activeTab">
+                                    <p-tabPanel header="Création">
+                                        <div class="grid">
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="1">Titre</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Titre"
+                                                                       id="1" [(ngModel)]="postesElement.titre"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="2">Discription</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Discription"
+                                                                       id="2" [(ngModel)]="postesElement.discription"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="3">Date affectation</label>
+                                                                <p-calendar  appendTo="body" id="3" placeholder="Date affectation"  [showTime]="true" [showSeconds]="false"
+                                                                        [(ngModel)]="postesElement.dateAffectation" dateFormat="{{dateFormat}}" [showIcon]="true"  ></p-calendar>
+                                                                
+                                                            </div>
+                                                <div class="field col-12 md:col-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addPostes()"></button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste {{item.postes?.length > 0 ? '(' + item.postes?.length + ')' : ''}}">
+                                            <div class="card">
+                                                <p-table [value]="item.postes" [scrollable]="true" scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Titre</th>
+                                                                        <th>Discription</th>
+                                                                        <th>Date affectation</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.titre}}</td>
+                                                                        <td>{{p.discription}}</td>
+                                                                        <td>{{p.dateAffectation | date: dateFormatColumn}}</td>
+                                                            <td>
+                                                                <button (click)="deletePoste(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editPoste(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+                            <p-tabPanel header="{{'Employes' | translate}}">
+                                <p-tabView [(activeIndex)]="activeTab">
+                                    <p-tabPanel header="Création">
+                                        <div class="grid">
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="1">Login</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Login"
+                                                                       id="1" [(ngModel)]="employesElement.login"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="2">Password<span style="color: red;">*</span></label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Password"
+                                                                       id="2" [(ngModel)]="employesElement.password"
+                                                                       autofocus  [ngClass]="{'ng-invalid ng-dirty' : !validEmployesPassword}"  >
+                                                                <small class='p-error' *ngIf='!validEmployesPassword'>Password est obligatoire.</small>
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="3">Prenom</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Prenom"
+                                                                       id="3" [(ngModel)]="employesElement.prenom"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="4">Nom</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Nom"
+                                                                       id="4" [(ngModel)]="employesElement.nom"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="5">Date de naissance</label>
+                                                                <p-calendar  appendTo="body" id="5" placeholder="Date de naissance"  [showTime]="true" [showSeconds]="false"
+                                                                        [(ngModel)]="employesElement.dateDeNaissance" dateFormat="{{dateFormat}}" [showIcon]="true"  ></p-calendar>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="6">Lieu de naissance</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Lieu de naissance"
+                                                                       id="6" [(ngModel)]="employesElement.lieuDeNaissance"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="7">Adresse</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Adresse"
+                                                                       id="7" [(ngModel)]="employesElement.adresse"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Sexe</label>
+                                                                <p-dropdown appendTo="body" [options]="sexes" [(ngModel)]="employesElement.sexe"
+                                                                        id="8"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="libelle" placeholder="Sexe"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateSexe('Sexe')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="9">Cin</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Cin"
+                                                                       id="9" [(ngModel)]="employesElement.cin"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Parcours universitaire</label>
+                                                                <p-dropdown appendTo="body" [options]="parcoursUniversitaires" [(ngModel)]="employesElement.parcoursUniversitaire"
+                                                                        id="10"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="id" placeholder="Parcours universitaire"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateParcoursUniversitaire('ParcoursUniversitaire')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="11">Tel</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Tel"
+                                                                       id="11" [(ngModel)]="employesElement.tel"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="12">Date embauche</label>
+                                                                <p-calendar  appendTo="body" id="12" placeholder="Date embauche"  [showTime]="true" [showSeconds]="false"
+                                                                        [(ngModel)]="employesElement.dateEmbauche" dateFormat="{{dateFormat}}" [showIcon]="true"  ></p-calendar>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="13">Matricule</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="matricule" [(ngModel)]="employesElement.matricule" placeholder="Matricule"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="14">Adress email</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Adress email"
+                                                                       id="14" [(ngModel)]="employesElement.adressEmail"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="15">Compte bancaire</label>
+                                                                <input appendTo="body" class="mb-2 mr-2" type="text" pInputText placeholder="Compte bancaire"
+                                                                       id="15" [(ngModel)]="employesElement.compteBancaire"
+                                                                       autofocus   >
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Poste</label>
+                                                                <p-dropdown appendTo="body" [options]="postes" [(ngModel)]="employesElement.poste"
+                                                                        id="17"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="id" placeholder="Poste"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreatePoste('Poste')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Notation</label>
+                                                                <p-dropdown appendTo="body" [options]="notations" [(ngModel)]="employesElement.notation"
+                                                                        id="18"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="id" placeholder="Notation"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateNotation('Notation')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="19">Nombre absence</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="nombreAbsence" [(ngModel)]="employesElement.nombreAbsence" placeholder="Nombre absence"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Conges</label>
+                                                                <p-dropdown appendTo="body" [options]="congess" [(ngModel)]="employesElement.conges"
+                                                                        id="20"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="id" placeholder="Conges"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateConges('Conges')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Echelle</label>
+                                                                <p-dropdown appendTo="body" [options]="echelles" [(ngModel)]="employesElement.echelle"
+                                                                        id="21"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="reference" placeholder="Echelle"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="col-1">
+                                                                <label></label>
+                                                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateEchelle('Echelle')"  class="p-button-success one-colonne-btn-success-align"></button>
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Echelon</label>
+                                                                <p-dropdown appendTo="body" [options]="echelons" [(ngModel)]="employesElement.echelon"
+                                                                        id="22"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="reference" placeholder="Echelon"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="field col-11 md:col-3">
+                                                                <label>Grade</label>
+                                                                <p-dropdown appendTo="body" [options]="grades" [(ngModel)]="employesElement.grade"
+                                                                        id="23"  [filter]="true" filterMatchMode="contains" [showClear]="true"
+                                                                        optionLabel="libelle" placeholder="Grade"  >
+                                                                </p-dropdown>
+                                                                
+                                                            </div>
+                                                            <div class="field col-12 md:col-4">
+                                                                <label for="24">Local</label>
+                                                                <p-inputNumber  appendTo="body" class="mb-2 mr-2" id="local" [(ngModel)]="employesElement.local" placeholder="Local"  ></p-inputNumber>
+                                                                
+                                                            </div>
+                                                <div class="field col-12 md:col-1">
+                                                    <button pButton pRipple type="button" icon="pi pi-plus" class="mt-4" label="OK" (click)="addEmployes()"></button>
+                                                </div>
+                                        </div>
+                                    </p-tabPanel>
+                                    <p-tabPanel header="Liste {{item.employes?.length > 0 ? '(' + item.employes?.length + ')' : ''}}">
+                                            <div class="card">
+                                                <p-table [value]="item.employes" [scrollable]="true" scrollHeight="200px">
+                                                    <ng-template pTemplate="header">
+                                                        <tr>
+                                                                        <th>Login</th>
+                                                                        <th>Password</th>
+                                                                        <th>Prenom</th>
+                                                                        <th>Nom</th>
+                                                                        <th>Date de naissance</th>
+                                                                        <th>Lieu de naissance</th>
+                                                                        <th>Adresse</th>
+                                                                        <th>Sexe</th>
+                                                                        <th>Cin</th>
+                                                                        <th>Parcours universitaire</th>
+                                                                        <th>Tel</th>
+                                                                        <th>Date embauche</th>
+                                                                        <th>Matricule</th>
+                                                                        <th>Adress email</th>
+                                                                        <th>Compte bancaire</th>
+                                                                        <th>Poste</th>
+                                                                        <th>Notation</th>
+                                                                        <th>Nombre absence</th>
+                                                                        <th>Conges</th>
+                                                                        <th>Echelle</th>
+                                                                        <th>Echelon</th>
+                                                                        <th>Grade</th>
+                                                                        <th>Local</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </ng-template>
+                                                    <ng-template pTemplate="body" let-p>
+                                                        <tr>
+                                                                        <td>{{p.login}}</td>
+                                                                        <td>{{p.password}}</td>
+                                                                        <td>{{p.prenom}}</td>
+                                                                        <td>{{p.nom}}</td>
+                                                                        <td>{{p.dateDeNaissance | date: dateFormatColumn}}</td>
+                                                                        <td>{{p.lieuDeNaissance}}</td>
+                                                                        <td>{{p.adresse}}</td>
+                                                                    <td>{{p.sexe?.libelle}}</td>
+                                                                        <td>{{p.cin}}</td>
+                                                                    <td>{{p.parcoursUniversitaire?.id}}</td>
+                                                                        <td>{{p.tel}}</td>
+                                                                        <td>{{p.dateEmbauche | date: dateFormatColumn}}</td>
+                                                                        <td>{{p.matricule}}</td>
+                                                                        <td>{{p.adressEmail}}</td>
+                                                                        <td>{{p.compteBancaire}}</td>
+                                                                    <td>{{p.poste?.id}}</td>
+                                                                    <td>{{p.notation?.id}}</td>
+                                                                        <td>{{p.nombreAbsence}}</td>
+                                                                    <td>{{p.conges?.id}}</td>
+                                                                    <td>{{p.echelle?.reference}}</td>
+                                                                    <td>{{p.echelon?.reference}}</td>
+                                                                    <td>{{p.grade?.libelle}}</td>
+                                                                        <td>{{p.local}}</td>
+                                                            <td>
+                                                                <button (click)="deleteEmploye(p)" pButton type="button" icon="pi pi-times"  class="p-button-rounded p-button-danger"></button>
+                                                                <button (click)="editEmploye(p)" pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2"></button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-template>
+                                                </p-table>
+                                            </div>
+                                    </p-tabPanel>
+                                </p-tabView>
+                            </p-tabPanel>
+                </p-tabView>
+            </ng-template>-->
+
+            <ng-template pTemplate="footer" >
+                <div class="grid-footer">
+                        <div>
+                            <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideEditDialog()"></button>
+                        </div>
+                    <div>
+                        <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px" (click)="edit()"></button>
+                    </div>
+                </div>
+            </ng-template>
+
+                    <app-employe-create-admin></app-employe-create-admin>
+
+                            <app-sexe-create-admin></app-sexe-create-admin>
+                            <app-parcours-universitaire-create-admin></app-parcours-universitaire-create-admin>
+                            <app-poste-create-admin></app-poste-create-admin>
+                            <app-notation-create-admin></app-notation-create-admin>
+                            <app-conges-create-admin></app-conges-create-admin>
+                            <app-echelle-create-admin></app-echelle-create-admin>
+                        </div>
+                    </p-tabPanel>
+                </p-tabView>
+            </ng-template>
+
+    </p-dialog>
+

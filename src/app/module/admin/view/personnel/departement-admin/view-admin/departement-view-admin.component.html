@@ -1,0 +1,129 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'departementTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-6">
+                        <label for="1">{{'Nom' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Nom' | translate}}" autofocus  id="1" [(ngModel)]="item.nom">
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="2">{{'Discription' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Discription' | translate}}" autofocus  id="2" [(ngModel)]="item.discription">
+                    </div>
+                  <!--  <div class="field col-12 md:col-6">
+                        <label for="5">{{'Employe' | translate}}</label>
+                        <p-dropdown [options]="employesss" [(ngModel)]="item.employe" id="5" [disabled]="true" optionLabel="password" placeholder="{{'Employe' | translate}}"></p-dropdown>
+                    </div>
+                </div>
+            </p-tabPanel>
+
+            <p-tabPanel header="{{'Postes' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.postes" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Titre</th>
+                                        <th>Discription</th>
+                                        <th>Date affectation</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.titre}}</td>
+                                        <td>{{p.discription}}</td>
+                                        <td>{{p.dateAffectation | date: dateFormatColumn}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="{{'Employes' | translate}}">
+                <div class="grid">
+                    <div class="col">
+                        <div class="card">
+                            <p-table [value]="item.employes" [scrollable]="true" scrollHeight="200px">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Login</th>
+                                        <th>Password</th>
+                                        <th>Prenom</th>
+                                        <th>Nom</th>
+                                        <th>Date de naissance</th>
+                                        <th>Lieu de naissance</th>
+                                        <th>Adresse</th>
+                                        <th>Sexe</th>
+                                        <th>Cin</th>
+                                        <th>Parcours universitaire</th>
+                                        <th>Tel</th>
+                                        <th>Date embauche</th>
+                                        <th>Matricule</th>
+                                        <th>Adress email</th>
+                                        <th>Compte bancaire</th>
+                                        <th>Poste</th>
+                                        <th>Notation</th>
+                                        <th>Nombre absence</th>
+                                        <th>Conges</th>
+                                        <th>Echelle</th>
+                                        <th>Echelon</th>
+                                        <th>Grade</th>
+                                        <th>Local</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-p>
+                                    <tr>
+                                        <td>{{p.login}}</td>
+                                        <td>{{p.password}}</td>
+                                        <td>{{p.prenom}}</td>
+                                        <td>{{p.nom}}</td>
+                                        <td>{{p.dateDeNaissance | date: dateFormatColumn}}</td>
+                                        <td>{{p.lieuDeNaissance}}</td>
+                                        <td>{{p.adresse}}</td>
+                                        <td>{{p.sexe?.libelle}}</td>
+                                        <td>{{p.cin}}</td>
+                                        <td>{{p.parcoursUniversitaire?.id}}</td>
+                                        <td>{{p.tel}}</td>
+                                        <td>{{p.dateEmbauche | date: dateFormatColumn}}</td>
+                                        <td>{{p.matricule}}</td>
+                                        <td>{{p.adressEmail}}</td>
+                                        <td>{{p.compteBancaire}}</td>
+                                        <td>{{p.poste?.id}}</td>
+                                        <td>{{p.notation?.id}}</td>
+                                        <td>{{p.nombreAbsence}}</td>
+                                        <td>{{p.conges?.id}}</td>
+                                        <td>{{p.echelle?.reference}}</td>
+                                        <td>{{p.echelon?.reference}}</td>
+                                        <td>{{p.grade?.libelle}}</td>
+                                        <td>{{p.local}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+
+    </ng-template>-->
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+
+    </ng-template>
+                </div>
+            </p-tabPanel>
+        </p-tabView>
+    </ng-template>
+</p-dialog>
+
+
+

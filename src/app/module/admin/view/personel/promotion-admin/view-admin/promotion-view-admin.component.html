@@ -1,0 +1,50 @@
+
+<p-dialog [(visible)]="viewDialog" [style]="{width: '70vw'}" header="{{'gradeTabPan' | translate}}" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="Information">
+                <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Grade' | translate}}</label>
+                        <p-dropdown [options]="grades" [(ngModel)]="item.grade" id="1" [disabled]="true" optionLabel="libelle" placeholder="{{'Grade' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="2">{{'Echelle' | translate}}</label>
+                        <p-dropdown [options]="echelles" [(ngModel)]="item.echelle" id="2" [disabled]="true" optionLabel="reference" placeholder="{{'Echelle' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="3">{{'Echelon' | translate}}</label>
+                        <p-dropdown [options]="echelons" [(ngModel)]="item.echelon" id="3" [disabled]="true" optionLabel="reference" placeholder="{{'Echelon' | translate}}"></p-dropdown>
+                    </div>
+                    <div class="field col-12 md:col-6">
+                        <label for="4">{{'Indice' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText [disabled]="true" placeholder="{{'Indice' | translate}}" autofocus  id="4" [(ngModel)]="item.indice">
+
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="12">{{'Date activation' | translate}}</label>
+                        <p-calendar id="12" [disabled]="true"  [showTime]="false" [showSeconds]="false" placeholder="{{'Date activation' | translate}}"  [(ngModel)]="item.dateActivation" dateFormat="{{dateFormat}}"></p-calendar>
+                    </div>
+
+
+                    <div class="field col-12 md:col-3">
+                        <label for="16">{{'Employe' | translate}}</label>
+                        <p-dropdown [options]="employes" [(ngModel)]="item.employe" id="16" [disabled]="true" optionLabel="cin" placeholder="{{'Employe' | translate}}"></p-dropdown>
+                    </div>
+                </div>   </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer" >
+        <div class="grid-footer">
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined" (click)="hideViewDialog()"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+
+

@@ -1,0 +1,279 @@
+<p-dialog [(visible)]="createDialog" [style]="{width: '70vw'}" header="{{'employeTabPan' | translate}}" [modal]="true"
+          styleClass="p-fluid" [maximizable]="true" [draggable]="false" [resizable]="false">
+    <ng-template pTemplate="content">
+        <p-tabView>
+            <p-tabPanel header="{{'Authentification des employés' | translate}}">
+                <div class="grid">
+
+                    <div class="field col-12 md:col-3">
+                        <label for="1">{{'Username' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText placeholder="{{'Username' | translate}}" id="1"
+                               [(ngModel)]="item.username"
+                        />
+
+                    </div>
+
+
+                     <div class="field col-12 md:col-3">
+                           <label for="2">{{'employePassword' | translate}}<span style="color: red;">*</span></label>
+                           <input class="mb-2 mr-2" type="text" pInputText  placeholder="{{'employePassword' | translate}}" id="2" [(ngModel)]="item.password"
+                                   [ngClass]="{'ng-invalid ng-dirty' : !validEmployePassword}"  />
+                           <small class='p-error' *ngIf='!validEmployePassword'>Password est obligatoire.</small>
+                       </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="14">{{'employeAdressEmail' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText
+                               placeholder="{{'employeAdressEmail' | translate}}" id="14" [(ngModel)]="item.adressEmail"
+                        />
+
+                    </div>
+                </div>
+                    </p-tabPanel>
+            <p-tabPanel header="{{'Informations personnels' | translate}}">
+                <div class="grid">
+
+                <div class="field col-12 md:col-3">
+                        <label for="3">{{'employePrenom' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText placeholder="{{'employePrenom' | translate}}"
+                               id="3" [(ngModel)]="item.prenom"
+                        />
+
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="4">{{'employeNom' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText placeholder="{{'employeNom' | translate}}"
+                               id="4" [(ngModel)]="item.nom"
+                        />
+
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="5">{{'Nom arabe' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText placeholder="{{'Nom arabe' | translate}}"
+                               id="5" [(ngModel)]="item.nomArabe"
+                        />
+
+                    </div>
+
+
+
+
+
+
+                    <div class="field col-12 md:col-3">
+                        <label for="6">{{'employeDateDeNaissance' | translate}}</label>
+                        <p-calendar appendTo="body" id="6"  [showTime]="true" [showSeconds]="false" placeholder="{{'Date de naissance' | translate}}"  [(ngModel)]="item.dateDeNaissance"
+                                    dateFormat="{{dateFormat}}"  >
+                        </p-calendar>
+
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="7">{{'employeLieuDeNaissance' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText
+                               placeholder="{{'employeLieuDeNaissance' | translate}}" id="7"
+                               [(ngModel)]="item.lieuDeNaissance"
+                        />
+
+                    </div>
+
+
+                    <div class="field col-12 md:col-3">
+                        <label for="8">{{'employeAdresse' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText placeholder="{{'employeAdresse' | translate}}"
+                               id="8" [(ngModel)]="item.adresse"
+                        />
+
+                    </div>
+
+
+                    <div class="field col-11 md:col-2">
+                        <label for="21">{{'employeSexe' | translate}}</label>
+                        <p-dropdown appendTo="body" [options]="sexes" [(ngModel)]="item.sexe" id="21" [filter]="true"
+                                    filterMatchMode="contains"
+                                    [showClear]="true" optionLabel="libelle"
+                                    placeholder="{{'employeSexe' | translate}}">
+                        </p-dropdown>
+
+                    </div>
+                    <div class="col-1">
+                        <label></label>
+                        <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateSexe('Sexe')"
+                                class="p-button-success one-colonne-btn-success-align"></button>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="9">{{'employeCin' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText placeholder="{{'employeCin' | translate}}"
+                               id="9" [(ngModel)]="item.cin"
+                        />
+
+                    </div>
+                    <div class="field col-11 md:col-2">
+                        <label for="20">{{'Situation familiale' | translate}}</label>
+                        <p-dropdown appendTo="body" [options]="situationFamiliales" [(ngModel)]="item.situationFamiliale" id="20"
+                                    [filter]="true" filterMatchMode="contains"
+                                    [showClear]="true" optionLabel="reference"
+                                    placeholder="{{'Situation familiale' | translate}}">
+                        </p-dropdown>
+
+                    </div>
+                    <div class="col-1">
+                        <label></label>
+                        <button pButton pRipple type="button" icon="pi pi-plus"
+                                (click)="openCreateSituationFamiliale('SituationFamiliale')"
+                                class="p-button-success one-colonne-btn-success-align"></button>
+                    </div>
+
+                <div class="field col-12 md:col-3">
+                    <label for="11">{{'employeTel' | translate}}</label>
+                    <input class="mb-2 mr-2" type="text" pInputText placeholder="{{'employeTel' | translate}}"
+                           id="11" [(ngModel)]="item.tel"
+                    />
+
+                </div>
+
+
+                    <div class="field col-11 md:col-2">
+                        <label for="10">{{'Parcours universitaire' | translate}}</label>
+                        <p-dropdown appendTo="body" [options]="parcoursUniversitaires" [(ngModel)]="item.parcoursUniversitaire" id="10" [filter]="true"
+                                    filterMatchMode="contains"
+                                    [showClear]="true" optionLabel="deplome"
+                                    placeholder="{{'Parcours universitaire' | translate}}">
+                        </p-dropdown>
+
+                    </div>
+                    <div class="col-1">
+                        <label></label>
+                        <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateParcoursUniversitaire('ParcoursUniversitaire')"
+                                class="p-button-success one-colonne-btn-success-align"></button>
+                    </div>
+
+                </div>
+            </p-tabPanel>
+                    <!--    <div class="field col-11 md:col-2">
+                            <label for="10">{{'employeParcoursUniversitaire' | translate}}</label>
+                            <p-dropdown  appendTo="body"  [options]="parcoursUniversitaire" [(ngModel)]="item.parcoursUniversitaire" id="10" [filter]="true" filterMatchMode="contains"
+                                    [showClear]="true" optionLabel=" id " placeholder="{{'employeParcoursUniversitaire' | translate}}"  >
+                            </p-dropdown>
+
+                        </div>
+                            <div class="col-1">
+                                <label></label>
+                                <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateParcoursUniversitaire('ParcoursUniversitaire')" class="p-button-success one-colonne-btn-success-align"></button>
+
+-->
+                <p-tabPanel header="{{'Informations professionnels' | translate}}">
+                    <div class="grid">
+                    <div class="field col-12 md:col-3">
+                        <label for="12">{{'employeDateEmbauche' | translate}}</label>
+                        <p-calendar appendTo="body" id="12" [showTime]="true" [showSeconds]="false"
+                                    placeholder="{{'employeDateEmbauche' | translate}}" [(ngModel)]="item.dateEmbauche"
+                                    dateFormat="{{dateFormat}}">
+                        </p-calendar>
+
+                    </div>
+
+                    <div class="field col-12 md:col-3">
+                        <label for="13">{{'employeMatricule' | translate}}</label>
+                        <p-inputNumber class="mb-2 mr-2" id="13" placeholder="{{'employeMatricule' | translate}}"
+                                       [(ngModel)]="item.matricule">
+                        </p-inputNumber>
+
+                    </div>
+
+
+
+
+                    <div class="field col-12 md:col-3">
+                        <label for="15">{{'employeCompteBancaire' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText
+                               placeholder="{{'employeCompteBancaire' | translate}}" id="15"
+                               [(ngModel)]="item.compteBancaire"
+                        />
+
+                    </div>
+
+
+                    <div class="field col-11 md:col-2">
+                        <label for="16">{{'employeDepartement' | translate}}</label>
+                        <p-dropdown appendTo="body" [options]="departements" [(ngModel)]="item.departement" id="16"
+                                    [filter]="true" filterMatchMode="contains"
+                                    [showClear]="true" optionLabel="nom"
+                                    placeholder="{{'employeDepartement' | translate}}">
+                        </p-dropdown>
+
+                    </div>
+                    <div class="col-1">
+                        <label></label>
+                        <button pButton pRipple type="button" icon="pi pi-plus"
+                                (click)="openCreateDepartement('Departement')"
+                                class="p-button-success one-colonne-btn-success-align"></button>
+                    </div>
+                    <div class="field col-12 md:col-3">
+                        <label for="17">{{'employePoste' | translate}}</label>
+                        <input class="mb-2 mr-2" type="text" pInputText placeholder="{{'employePoste' | translate}}"
+                               id="17" [(ngModel)]="item.poste"
+                        />
+
+                    </div>
+
+
+
+                    <div class="field col-11 md:col-2">
+                        <label for="18">{{'employeLocal' | translate}}</label>
+                        <p-dropdown appendTo="body" [options]="locals" [(ngModel)]="item.local" id="18" [filter]="true"
+                                    filterMatchMode="contains"
+                                    [showClear]="true" optionLabel="libelle"
+                                    placeholder="{{'employeLocal' | translate}}">
+                        </p-dropdown>
+
+                    </div>
+
+
+                    <div class="col-1">
+                        <label></label>
+                        <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateLocal('Local')"
+                                class="p-button-success one-colonne-btn-success-align"></button>
+                    </div>
+
+                    <!--  <div class="col-1">
+                          <label></label>
+                          <button pButton pRipple type="button" icon="pi pi-plus" (click)="openCreateLocal('Local')" class="p-button-success one-colonne-btn-success-align"></button>
+                      </div>-->
+
+                    <!--   <div class="field col-12 md:col-3">
+                           <label for="19">{{'employeLocal' | translate}}</label>
+                           <p-inputNumber class="mb-2 mr-2" id="24" placeholder="{{'employeLocal' | translate}}" [(ngModel)]="item.local"  >
+                           </p-inputNumber>
+
+                       </div>-->
+
+                </div>
+            </p-tabPanel>
+
+        </p-tabView>
+
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <div class="grid-step">
+            <div style="margin-left: auto;">
+                <button pButton pRipple label="Valider" icon="pi pi-check" style="margin:10px"
+                        (click)="save()"></button>
+            </div>
+            <div>
+                <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-outlined"
+                        (click)="hideCreateDialog()"></button>
+            </div>
+
+        </div>
+    </ng-template>
+
+    <app-sexe-create-admin></app-sexe-create-admin>
+    <app-departement-create-admin></app-departement-create-admin>
+    <app-echelle-create-admin></app-echelle-create-admin>
+    <app-local-create-admin></app-local-create-admin>
+    <app-parcours-universitaire-create-admin></app-parcours-universitaire-create-admin>
+    <app-notification-create-admin></app-notification-create-admin>
+
+
+</p-dialog>
